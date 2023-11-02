@@ -6,7 +6,7 @@ class App(tk.Tk):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         
-        self.title("Xray app")
+        self.title("Xray prediction app")
 
         self._setup_mainwindow()
 
