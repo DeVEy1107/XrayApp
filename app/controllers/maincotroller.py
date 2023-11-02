@@ -2,6 +2,10 @@ import tkinter as tk
 
 from views import FileManager, ImageEditor, DisplayCanvas
 
+import _init_paths
+
+from api.prediction import get_predictions
+
 class MainController:
     def __init__(self, root) -> None:
         
@@ -33,6 +37,7 @@ class MainController:
         self.image_editor.markingmode_button.configure(command=self.__switch_mode)
         self.image_editor.clear_allpoints_button.configure(command=self.__clear_allpoints)
         self.image_editor.save_marked_image_button.configure(command=self.__save_markedimage)
+        self.image_editor.auto_marking_button.configure(command=self.__auto_marking)
 
     def __preview_file(self) -> None:
         filepath = self.file_manager.file_listbox.get_selected_filepath()
@@ -52,4 +57,7 @@ class MainController:
     def __save_markedimage(self) -> None:
         self.display_canvas.save_markedimage()
 
-        
+    def __auto_marking(self) -> None:
+        filepath = self.file_manager.file_listbox.get_selected_filepath()
+        predicted_pos = get_predictions([filepath])
+        self.display_canvas.auto_marking(predicted_pos.squeeze().tolist())

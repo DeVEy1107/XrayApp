@@ -1,6 +1,8 @@
 *.pyc
 *.tif
+*.pth
 
+.vscode
 test
 data
 res

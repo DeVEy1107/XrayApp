@@ -113,10 +113,6 @@ class BaseCanvas(tk.Canvas):
             abs_point_y = height - 1
 
         self._points_pos.append([abs_point_x, abs_point_y])
-
-        print(f"Marking at ({abs_point_x}, {abs_point_y})")
-        print(f"current points {self._points_pos}")
-
         self.update_canvas()
 
     def _delete_one_point(self, event) -> None:
@@ -174,4 +170,10 @@ class BaseCanvas(tk.Canvas):
         if file_path:
             image_pil.save(file_path, "TIFF")
 
+    def set_points_pos(self, points_pos) -> None:
+        self.clear_allpoints()
+        assert isinstance(points_pos, list), "Not a list type!"
+        for x, y in points_pos:     
+            self._points_pos.append([int(round(x)), int(round(y))])
+        self.update_canvas()
 

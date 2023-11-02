@@ -9,8 +9,6 @@ class ImageEditor(tk.LabelFrame):
     
         self._setup_widgets()
 
-
-
     def _setup_widgets(self) -> None:
 
         self.auto_marking_button = tk.Button(self, text="自動標註")

@@ -40,3 +40,5 @@ class DisplayCanvas(tk.LabelFrame):
    def save_markedimage(self) -> None:
       self.canvas.save_markedimage()
 
+   def auto_marking(self, points_pos) -> None:
+      self.canvas.set_points_pos(points_pos)

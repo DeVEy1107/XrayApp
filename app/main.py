@@ -27,7 +27,6 @@ class App(tk.Tk):
         self.geometry(f"{self.window_w}x{self.window_h}+{x_pos}+{y_pos}")
 
 
-
 if __name__ == "__main__":
     app = App()
     app.mainloop()
