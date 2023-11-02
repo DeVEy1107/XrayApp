@@ -27,6 +27,12 @@ class DisplayCanvas(tk.LabelFrame):
          self.canvas.load_image(image)
          self.canvas.update_canvas()
    
+   def switch_mode(self, mode) -> None:
+      self.canvas.switch_mode(mode)
+
    def clear_canvas(self) -> None:
       self.canvas.init_canvas()
+   
+   def clear_allpoints(self) -> None:
+      self.canvas.clear_allpoints()
 
