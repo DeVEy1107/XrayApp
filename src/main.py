@@ -6,6 +6,8 @@ class App(tk.Tk):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         
+        self.title("Xray app")
+
         self._setup_mainwindow()
 
         self.controller = MainController(self)

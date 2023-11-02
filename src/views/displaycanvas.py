@@ -24,6 +24,7 @@ class DisplayCanvas(tk.LabelFrame):
       if os.path.isfile(filepath):
          print(f"Loading image from {filepath}")
          image = Image.open(filepath)
+         
          self.canvas.load_image(image)
          self.canvas.update_canvas()
    
@@ -35,4 +36,7 @@ class DisplayCanvas(tk.LabelFrame):
    
    def clear_allpoints(self) -> None:
       self.canvas.clear_allpoints()
+   
+   def save_markedimage(self) -> None:
+      self.canvas.save_markedimage()
 

@@ -37,7 +37,6 @@ class ImageEditor(tk.LabelFrame):
             self, text="標註模式", variable=self.switchmode_var, value="marking"
         )
         self.markingmode_button.grid(row=1, column=2, padx=5, pady=5)
-
     
     def get_current_mode(self) -> str:
         return self.switchmode_var.get()

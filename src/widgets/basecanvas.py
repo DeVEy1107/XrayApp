@@ -1,7 +1,8 @@
-import os
-
 import tkinter as tk
 
+import numpy as np
+
+from tkinter import filedialog
 from PIL import Image, ImageTk
 
 class BaseCanvas(tk.Canvas):
@@ -36,11 +37,18 @@ class BaseCanvas(tk.Canvas):
         self._pointid = []
 
 
-    def load_image(self, img:Image.Image) -> None:
+    def load_image(self, image:Image.Image) -> None:
         self.init_canvas()
 
-        self._image = img
-        self._current_image = img 
+        image = image.convert("RGBA")
+        image_ndarr = np.array(image)
+        row_indices, col_indices = np.where(image_ndarr[:, :, 3] == 0)
+
+        for y, x in zip(row_indices, col_indices):
+            self._points_pos.append([x, y])
+        
+        self._image = image
+        self._current_image = image 
 
     def update_canvas(self) -> None:
         if self._current_image:
@@ -147,6 +155,23 @@ class BaseCanvas(tk.Canvas):
     def clear_allpoints(self) -> None:
         self.delete("point")
         self._pointid = []
+        self._points_pos = []
     
     def save_markedimage(self) -> None:
-        pass
+        image = self._image
+        image = image.convert("RGBA")
+        image_ndarr = np.array(image)
+        image_ndarr[:, :, 3] = 255
+
+        for x, y in self._points_pos:
+            image_ndarr[y, x, 3] = 0
+
+        image_pil = Image.fromarray(image_ndarr)
+
+        file_path = filedialog.asksaveasfilename(
+            defaultextension=".tif", filetypes=[("TIFF Files", "*.tif"), ("All Files", "*.*")]
+        )
+        if file_path:
+            image_pil.save(file_path, "TIFF")
+
+

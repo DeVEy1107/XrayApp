@@ -32,6 +32,7 @@ class MainController:
         self.image_editor.previewmode_button.configure(command=self.__switch_mode)
         self.image_editor.markingmode_button.configure(command=self.__switch_mode)
         self.image_editor.clear_allpoints_button.configure(command=self.__clear_allpoints)
+        self.image_editor.save_marked_image_button.configure(command=self.__save_markedimage)
 
     def __preview_file(self) -> None:
         filepath = self.file_manager.file_listbox.get_selected_filepath()
@@ -48,5 +49,7 @@ class MainController:
     def __clear_allpoints(self) -> None:
         self.display_canvas.clear_allpoints()
 
+    def __save_markedimage(self) -> None:
+        self.display_canvas.save_markedimage()
 
         
